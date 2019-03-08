@@ -1,0 +1,5 @@
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphique.Csharp\webExpoLibProject\bin\Release\webExpo.dll
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphique.Csharp\webExpoLibProject\bin\Release\webExpo.pdb
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphique.Csharp\webExpoLibProject\obj\Release\webExpoLib.csproj.CoreCompileInputs.cache
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphique.Csharp\webExpoLibProject\obj\Release\webExpo.dll
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphique.Csharp\webExpoLibProject\obj\Release\webExpo.pdb

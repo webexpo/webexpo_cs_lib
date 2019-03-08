@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EAEF21B2-E7FA-4421-81F7-0D09C9F3C701}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zygotine</RootNamespace>
+    <AssemblyName>webExpo</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;SPY</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="sysglobl" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\CPoly.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\CubicEquation.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\CubicExtrapolation.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\DiGamma.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\GammaFunction.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\Integration\NumericIntegration-integrate.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\Integration\NumericIntegration.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\Matrix.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\Matrix2x2.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\MersenneTwister.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\PolynomialRootFinder.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\QuadraticEquation.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Numerics\XInverse4Y.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\ExponentialDistribution-CDF.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\ExponentialDistribution-ICDFf.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\ExponentialDistribution-Random.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\GammaDistribution-CDF.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\GammaDistribution-ICDF.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\GammaDistribution-PDF.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\GammaDistribution-Random.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\NormalDistribution-CDF.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\NormalDistribution-ICDF.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\NormalDistribution-PDF.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\NormalDistribution-Random.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\PoissonDistribution-PDF.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\PoissonDistribution-Random.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Distribution\UniformDistribution-Random.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Quantile.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\RNG.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\RVar.cs" />
+    <Compile Include="WebExpo\Random Sample Generation\Statistics\Sampler.cs" />
+    <Compile Include="WebExpo\Result Interpretation\Util-ex.cs" />
+    <Compile Include="WebExpo\Result Interpretation\Util-NA.cs" />
+    <Compile Include="WebExpo\Result Interpretation\Util.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DataSummary.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\Bounds.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\DensGenICDF.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\Icdf.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\LMode.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\LModeExt.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\ParamB01.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\ReferencePoints.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\SecuredNRA.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\SecuredNRSearch.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DensGenICDF\Visits.cs" />
+    <Compile Include="WebExpo\Result Interpretation\DescendingComparer.cs" />
+    <Compile Include="WebExpo\Result Interpretation\InitialValues.cs" />
+    <Compile Include="WebExpo\Result Interpretation\LPhiObject.cs" />
+    <Compile Include="WebExpo\Data Preparation\GTMeasure.cs" />
+    <Compile Include="WebExpo\Data Preparation\IntervalMeasure.cs" />
+    <Compile Include="WebExpo\Data Preparation\LTMeasure.cs" />
+    <Compile Include="WebExpo\Data Preparation\UncensoredMeasure.cs" />
+    <Compile Include="WebExpo\Data Preparation\Measure.cs" />
+    <Compile Include="WebExpo\Data Preparation\MeasureList.cs" />
+    <Compile Include="WebExpo\Data Preparation\MeasurementError.cs" />
+    <Compile Include="WebExpo\Data Preparation\Worker.cs" />
+    <Compile Include="WebExpo\Result Interpretation\Message.cs" />
+    <Compile Include="WebExpo\Result Interpretation\Messages.cs" />
+    <Compile Include="WebExpo\Models\BetweenWorkerModel.cs" />
+    <Compile Include="WebExpo\Models\Chains\Chain.cs" />
+    <Compile Include="WebExpo\Models\Chains\ChainComparison.cs" />
+    <Compile Include="WebExpo\Models\Chains\ChainNamePair.cs" />
+    <Compile Include="WebExpo\Models\Chains\ChainPairCreator.cs" />
+    <Compile Include="WebExpo\Models\Chains\Mcmc.cs" />
+    <Compile Include="WebExpo\Models\Chains\McmcParameters.cs" />
+    <Compile Include="WebExpo\Models\GenerateValues\MEParmGen.cs" />
+    <Compile Include="WebExpo\Models\GenerateValues\MuTruncatedGen.cs" />
+    <Compile Include="WebExpo\Models\GenerateValues\SigmaTruncatedDataGen.cs" />
+    <Compile Include="WebExpo\Models\GenerateValues\TrueValuesGen.cs" />
+    <Compile Include="WebExpo\Models\GenerateValues\YGen.cs" />
+    <Compile Include="WebExpo\Models\GenObject\AbstractGenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\EmptyGenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\ME_CV_GenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\MuTruncatedData_GenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\SigmaTruncatedDataLNorm_GenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\SigmaTruncatedData_GenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\Sigma_LM_GenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\Sigma_woLM_GenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\TrueValue_CV_LogN_GenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\TrueValue_CV_NormGenObject.cs" />
+    <Compile Include="WebExpo\Models\GenObject\TrueValue_SD_GenObject.cs" />
+    <Compile Include="WebExpo\Models\Model.cs" />
+    <Compile Include="WebExpo\Models\Parameters\AbstractBWModelParameters.cs" />
+    <Compile Include="WebExpo\Models\Parameters\AbstractModelParameters.cs" />
+    <Compile Include="WebExpo\Models\Parameters\BWModelParameters.cs" />
+    <Compile Include="WebExpo\Models\Parameters\BWModelParameters_UniformPriorOnSds.cs" />
+    <Compile Include="WebExpo\Models\Parameters\GlobalParameters.cs" />
+    <Compile Include="WebExpo\Models\Parameters\SEGInformedVarModelParameters.cs" />
+    <Compile Include="WebExpo\Models\Parameters\UninformativeModelParameters.cs" />
+    <Compile Include="WebExpo\Models\Results\ModelResult.cs" />
+    <Compile Include="WebExpo\Models\SEGInformedVarModel.cs" />
+    <Compile Include="WebExpo\Models\SEGUninformativeModel.cs" />
+    <Compile Include="WebExpo\Result Interpretation\NameOf.cs" />
+    <Compile Include="WebExpo\Result Interpretation\OutLogoutMoments.cs" />
+    <Compile Include="WebExpo\Result Interpretation\PastDataSummary.cs" />
+    <Compile Include="WebExpo\Result Interpretation\Range.cs" />
+    <Compile Include="WebExpo\Result Interpretation\RNormCensored.cs" />
+    <Compile Include="WebExpo\Result Interpretation\SGNFnAParam.cs" />
+    <Compile Include="WebExpo\Result Interpretation\WebExpoFunctions3.cs" />
+    <Compile Include="WebExpo\Result Interpretation\WEException.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
