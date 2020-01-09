@@ -64,6 +64,65 @@
             }
         }
 
+	// Convenience constructor added
+        public MeasureList(double[] measures) : this(ConvertMeasuresToString(measures))
+        {
+
+        }
+
+	// Convenience constructor added
+        public MeasureList(double[] measures, double[] measErrRange) : this(ConvertMeasErrToString(measErrRange) + "|" + ConvertMeasuresToString(measures))
+        {
+
+        }
+
+
+        private static String ConvertMeasuresToString(double[] measures)
+        {
+            return String.Join("|", measures);
+        }
+
+        private static String ConvertMeasErrToString(double[] measErrVarCoeffRange)
+        {
+            return "cv(" + ShowDouble(measErrVarCoeffRange[0] / 100) + "," + ShowDouble(measErrVarCoeffRange[1] / 100) + ")";
+        }
+
+        private static string ShowDouble(double d)
+        {
+            return ToSignificantDigits(d, 3);
+        }
+
+        private static string ToSignificantDigits(double value, int significant_digits)
+        {
+            // Use G format to get significant digits.
+            // Then convert to double and use F format.
+            string format1 = "{0:G" + significant_digits.ToString() + "}";
+            string result = Convert.ToDouble(
+                String.Format(format1, value)).ToString("F99");
+
+            // Rmove trailing 0s.
+            result = result.TrimEnd('0');
+
+            // Rmove the decimal point and leading 0s,
+            // leaving just the digits.
+            string test = result.Replace(",", ".").Replace(".", "").TrimStart('0');
+
+            // See if we have enough significant digits.
+            if (significant_digits > test.Length)
+            {
+                // Add trailing 0s.
+                result += new string('0', significant_digits - test.Length);
+            }
+            else
+            {
+                // See if we should remove the trailing decimal point.
+                if (/*(significant_digits < test.Length) &&*/ result.EndsWith(","))
+                    result = result.Substring(0, result.Length - 1);
+            }
+
+            return result;
+        }
+
         public void RemoveMeasurementError()
         {
             if (this.MEAny)
