@@ -19,7 +19,17 @@
                 measuresByCensoringType.Add(ctype, new List<Measure>());
         }
 
-        public MeasureList(string s) : this()
+        public MeasureList(string s) : this(s, null, false)
+        {
+
+        }
+
+        public MeasureList(string s, double? oel) : this(s, oel, oel != null)
+        {
+
+        }
+
+        public MeasureList(string s, double? oel, bool logNormDist) : this()
         {
             string[] records = s.Replace(" ", "").Split(recordSeparators, StringSplitOptions.RemoveEmptyEntries);
             if (records.Length == 0)
@@ -62,16 +72,20 @@
 
                  }
             }
+
+            if ( logNormDist )
+            {
+                StandardiserObservations(oel);
+            }
         }
 
 	// Convenience constructor added
-        public MeasureList(double[] measures) : this(ConvertMeasuresToString(measures))
+        public MeasureList(double[] measures, double oel, bool logNormDist) : this(ConvertMeasuresToString(measures), oel, logNormDist)
         {
-
         }
 
 	// Convenience constructor added
-        public MeasureList(double[] measures, double[] measErrRange) : this(ConvertMeasErrToString(measErrRange) + "|" + ConvertMeasuresToString(measures))
+        public MeasureList(double[] measures, double[] measErrRange, double oel, bool logNormDist) : this(ConvertMeasErrToString(measErrRange) + "|" + ConvertMeasuresToString(measures), oel, logNormDist)
         {
 
         }
@@ -436,16 +450,22 @@
         private List<Measure> measuresList = new List<Measure>();
         #endregion
 
-        public void StandardiserObservations(double vle)
+        public void StandardiserObservations(double? vle)
         {
-            foreach ( Measure m in measuresList ) {
-                if ( !double.IsNaN(m.A) )
+            if (vle != null)
+            {
+                double oel = (double)vle;
+
+                foreach (Measure m in measuresList)
                 {
-                    m.A = m.A / vle;
-                }
-                if (!double.IsNaN(m.B))
-                {
-                    m.B = m.B / vle;
+                    if (!double.IsNaN(m.A))
+                    {
+                        m.A = m.A / oel;
+                    }
+                    if (!double.IsNaN(m.B))
+                    {
+                        m.B = m.B / oel;
+                    }
                 }
             }
         }
