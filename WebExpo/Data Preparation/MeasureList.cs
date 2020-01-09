@@ -84,7 +84,7 @@
 
         private static String ConvertMeasErrToString(double[] measErrVarCoeffRange)
         {
-            return "cv(" + ShowDouble(measErrVarCoeffRange[0] / 100) + "," + ShowDouble(measErrVarCoeffRange[1] / 100) + ")";
+            return "cv(" + ShowDouble(measErrVarCoeffRange[0] / 100) + "~" + ShowDouble(measErrVarCoeffRange[1] / 100) + ")";
         }
 
         private static string ShowDouble(double d)
@@ -168,7 +168,7 @@
                 return;
             }
 
-            string[] numbers = str.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] numbers = str.Split(new char[] { '~' }, StringSplitOptions.RemoveEmptyEntries);
             if ((numbers.Length == 0) || (numbers.Length > 2))
             {
                 return;
