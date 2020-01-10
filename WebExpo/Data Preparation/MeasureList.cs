@@ -91,7 +91,7 @@
         }
 
 
-        private static String ConvertMeasuresToString(double[] measures)
+        private static String ConvertMeasuresToString<T>(T[] measures)
         {
             return String.Join("|", measures);
         }
