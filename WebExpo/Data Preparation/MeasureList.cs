@@ -80,18 +80,18 @@
         }
 
 	// Convenience constructor added
-        public MeasureList(double[] measures, double oel, bool logNormDist) : this(ConvertMeasuresToString(measures), oel, logNormDist)
+        public MeasureList(Array measures, double oel, bool logNormDist) : this(ConvertMeasuresToString(measures), oel, logNormDist)
         {
         }
 
 	// Convenience constructor added
-        public MeasureList(double[] measures, double[] measErrRange, double oel, bool logNormDist) : this(ConvertMeasErrToString(measErrRange) + ConvertMeasuresToString(measures), oel, logNormDist)
+        public MeasureList(Array measures, double[] measErrRange, double oel, bool logNormDist) : this(ConvertMeasErrToString(measErrRange) + ConvertMeasuresToString(measures), oel, logNormDist)
         {
 
         }
 
 
-        private static String ConvertMeasuresToString<T>(T[] measures)
+        private static String ConvertMeasuresToString(Array measures)
         {
             return String.Join("|", measures);
         }
