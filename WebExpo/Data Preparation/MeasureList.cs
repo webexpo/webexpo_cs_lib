@@ -85,7 +85,7 @@
         }
 
 	// Convenience constructor added
-        public MeasureList(double[] measures, double[] measErrRange, double oel, bool logNormDist) : this(ConvertMeasErrToString(measErrRange) + "|" + ConvertMeasuresToString(measures), oel, logNormDist)
+        public MeasureList(double[] measures, double[] measErrRange, double oel, bool logNormDist) : this(ConvertMeasErrToString(measErrRange) + ConvertMeasuresToString(measures), oel, logNormDist)
         {
 
         }
@@ -98,7 +98,12 @@
 
         private static String ConvertMeasErrToString(double[] measErrVarCoeffRange)
         {
-            return "cv(" + ShowDouble(measErrVarCoeffRange[0] / 100) + "~" + ShowDouble(measErrVarCoeffRange[1] / 100) + ")";
+            String str = "";
+            if (measErrVarCoeffRange != null && measErrVarCoeffRange.Length == 2 )
+            {
+                str = "cv(" + ShowDouble(measErrVarCoeffRange[0] / 100) + "~" + ShowDouble(measErrVarCoeffRange[1] / 100) + ")|";
+            }
+            return str;
         }
 
         private static string ShowDouble(double d)
