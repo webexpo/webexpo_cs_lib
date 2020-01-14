@@ -9,8 +9,8 @@
 
     public class MeasureList
     {
-        public double? OEL { get; set; } = null;
-        public bool LogNormalDist { get; set; } = false;
+        public double OEL { get; set; }
+        public bool LogNormalDist { get; set; }
 
         private static readonly Regex rgxME = new Regex(@"(sd|cv)\(.*\)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
@@ -22,7 +22,7 @@
                 measuresByCensoringType.Add(ctype, new List<Measure>());
         }
 
-        public MeasureList(string s, double? oel = null, bool logNormDist = false) : this()
+        public MeasureList(string s, double oel = 100, bool logNormDist = false) : this()
         {
             this.OEL = oel;
             this.LogNormalDist = logNormDist;

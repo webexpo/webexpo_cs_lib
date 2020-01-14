@@ -24,6 +24,14 @@
             : base(measures, specificParams.LogNormalDstrn, mcmcParams)
         {
             this.PastData = pastDataSummary == null ? PastDataSummary.EmptyObject : pastDataSummary;
+
+            /*
+             * Standardization wrt OEL for log normal distribution 
+             */
+            if (measures.LogNormalDist && this.PastData.Defined)
+            {
+                this.PastData.Mean -= Math.Log(measures.OEL);
+            }
             this.Messages.Add(this.PastData.Messages);
             this.LogSigmaMu = specificParams.LogSigmaMu;
             this.LogSigmaPrec = specificParams.LogSigmaPrec;

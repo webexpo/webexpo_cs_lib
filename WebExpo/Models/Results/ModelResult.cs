@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     public class ModelResult
     {
@@ -31,12 +32,6 @@
             model.Data.MeasureList.WorkerTags.CopyTo(this.WorkerIds, 0);
             this.PastData = null;
             this.McmcParameters = new McmcParameters(nIter: ParentModel.NIter, nBurnin: ParentModel.NBurnin, nThin: ParentModel.NThin, monitorBurnin: ParentModel.MonitorBurnin);
-
-            if ( model.Data.MeasureList.LogNormalDist && model.Data.MeasureList.OEL != null )
-            {
-                string[] chainNames = this.GetChainNames();
-                double oel = (double)model.Data.MeasureList.OEL;
-            }
         }
 
         public string[] GetChainNames()
@@ -64,6 +59,21 @@
         internal void AddWorkerMuChains(IList<Worker> workers)
         {
             Chains.AddWorkerMuChain(workers);
+        }
+
+        public void StandardizeChains(double oel)
+        {
+            Regex muChainRegex = new Regex(@"^mu.*Sample$");
+            string[] chainIdsStandarize = this.GetChainNames().Where(cn => muChainRegex.Match(cn).Success).ToArray<string>();
+            foreach( string chainId in chainIdsStandarize)
+            {
+                double[] c = this.GetChainByName(chainId);
+                for ( int i = 0; i < c.Length; i++ )
+                {
+                    c[i] += System.Math.Log(oel);
+                }
+                int f = 1;
+            }
         }
 
     }

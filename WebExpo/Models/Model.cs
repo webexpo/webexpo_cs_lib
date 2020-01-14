@@ -12,6 +12,7 @@
         internal int NBurnin { get; set; }
         internal int NThin { get; set; }
         internal bool MonitorBurnin { get; set; }
+        internal double OEL { get; set; }
         public bool OutcomeIsLogNormallyDistributed { get; private set; } = true;
         public static Version Version { get; private set; } = new Version(0, 3);
         internal MeasurementError ME { get; private set; }
@@ -37,6 +38,7 @@
             this.OutcomeIsLogNormallyDistributed = outcomeIsLogNormallyDistributed;
             this.Data = new DataSummary(measures, this.OutcomeIsLogNormallyDistributed);
             this.ME = measures.ME;
+            this.OEL = measures.OEL;
         }
         protected static Model.MESupport MeasurementErrorSupport = new MESupport(me_CV: false, meSD: false);
 
@@ -82,6 +84,10 @@
             this.PRNGSeed = prngSeed;
             this.Result.PRNGSeed = prngSeed;
             this.Run();
+            if ( this.OutcomeIsLogNormallyDistributed )
+            {
+                this.Result.StandardizeChains(this.OEL);
+            }
         }
 
     }
