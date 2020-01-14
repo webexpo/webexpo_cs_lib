@@ -58,7 +58,9 @@
             }
         }
 
-        public bool Valid { get { return this.Messages.Level != Message.Severity.Error; } }
+        public bool Valid { get {
+                return this.Messages.Level != Message.Severity.Error;
+            } }
 
         internal abstract void Run();
 

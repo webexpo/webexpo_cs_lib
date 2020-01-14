@@ -9,6 +9,9 @@
 
     public class MeasureList
     {
+        public double? OEL { get; set; } = null;
+        public bool LogNormalDist { get; set; } = false;
+
         private static readonly Regex rgxME = new Regex(@"(sd|cv)\(.*\)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         #region Constructor
@@ -19,18 +22,11 @@
                 measuresByCensoringType.Add(ctype, new List<Measure>());
         }
 
-        public MeasureList(string s) : this(s, null, false)
+        public MeasureList(string s, double? oel = null, bool logNormDist = false) : this()
         {
+            this.OEL = oel;
+            this.LogNormalDist = logNormDist;
 
-        }
-
-        public MeasureList(string s, double? oel) : this(s, oel, oel != null)
-        {
-
-        }
-
-        public MeasureList(string s, double? oel, bool logNormDist) : this()
-        {
             string[] records = s.Replace(" ", "").Split(recordSeparators, StringSplitOptions.RemoveEmptyEntries);
             if (records.Length == 0)
             {
@@ -73,9 +69,9 @@
                  }
             }
 
-            if ( logNormDist )
+            if ( this.LogNormalDist && this.OEL != null )
             {
-                StandardiserObservations(oel);
+                StandardiserObservations();
             }
         }
 
@@ -93,7 +89,10 @@
 
         private static String ConvertMeasuresToString(Array measures)
         {
-            return String.Join("|", measures);
+            Object[] meas = new object[measures.Length];
+            measures.CopyTo(meas, 0);
+            string str = String.Join("|", meas);
+            return str;
         }
 
         private static String ConvertMeasErrToString(double[] measErrVarCoeffRange)
@@ -455,22 +454,19 @@
         private List<Measure> measuresList = new List<Measure>();
         #endregion
 
-        public void StandardiserObservations(double? vle)
+        public void StandardiserObservations()
         {
-            if (vle != null)
-            {
-                double oel = (double)vle;
+            double oel = (double) this.OEL;
 
-                foreach (Measure m in measuresList)
+            foreach (Measure m in measuresList)
+            {
+                if (!double.IsNaN(m.A))
                 {
-                    if (!double.IsNaN(m.A))
-                    {
-                        m.A = m.A / oel;
-                    }
-                    if (!double.IsNaN(m.B))
-                    {
-                        m.B = m.B / oel;
-                    }
+                    m.A = m.A / oel;
+                }
+                if (!double.IsNaN(m.B))
+                {
+                    m.B = m.B / oel;
                 }
             }
         }
