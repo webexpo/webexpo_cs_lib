@@ -31,6 +31,12 @@
             model.Data.MeasureList.WorkerTags.CopyTo(this.WorkerIds, 0);
             this.PastData = null;
             this.McmcParameters = new McmcParameters(nIter: ParentModel.NIter, nBurnin: ParentModel.NBurnin, nThin: ParentModel.NThin, monitorBurnin: ParentModel.MonitorBurnin);
+
+            if ( model.Data.MeasureList.LogNormalDist && model.Data.MeasureList.OEL != null )
+            {
+                string[] chainNames = this.GetChainNames();
+                double oel = (double)model.Data.MeasureList.OEL;
+            }
         }
 
         public string[] GetChainNames()
