@@ -59,7 +59,7 @@
             this.NS2 = (this.N - 1) * (this.SD * this.SD);
         }
 
-        public PastDataSummary(double mean, double sd, int n, double? oel = null, bool logNormDist = false) : this()
+        public PastDataSummary(double mean, double sd, int n) : this()
         {
             if (double.IsNaN(mean) || double.IsNaN(sd) || n < 1)
             {
@@ -70,10 +70,6 @@
             this.N = n;
             this.SD = sd;
             this.Mean = mean;
-            if ( oel != null && logNormDist )
-            {
-                this.Mean -= Math.Log((double) oel);
-            }
             SetParameters();
             
         } //# end of past.data.summary

@@ -72,7 +72,6 @@
                 {
                     c[i] += System.Math.Log(oel);
                 }
-                int f = 1;
             }
         }
 

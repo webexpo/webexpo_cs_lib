@@ -28,6 +28,10 @@
                 this.Messages.AddWarning("Mcmc parameters were undefined, using default values", this.ClassName);
             }
 
+            if ( outcomeIsLogNormallyDistributed )
+            {
+                measures.StandardizeObservations(measures.OEL);
+            }
 
             this.Messages.Add(measures.Error);
             this.Messages.Add(mcmcParams.Error);
@@ -39,6 +43,8 @@
             this.Data = new DataSummary(measures, this.OutcomeIsLogNormallyDistributed);
             this.ME = measures.ME;
             this.OEL = measures.OEL;
+
+
         }
         protected static Model.MESupport MeasurementErrorSupport = new MESupport(me_CV: false, meSD: false);
 

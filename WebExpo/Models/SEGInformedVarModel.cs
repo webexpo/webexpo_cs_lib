@@ -28,7 +28,7 @@
             /*
              * Standardization wrt OEL for log normal distribution 
              */
-            if (measures.LogNormalDist && this.PastData.Defined)
+            if (this.OutcomeIsLogNormallyDistributed && this.PastData.Defined)
             {
                 this.PastData.Mean -= Math.Log(measures.OEL);
             }

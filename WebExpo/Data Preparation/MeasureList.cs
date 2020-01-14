@@ -10,8 +10,6 @@
     public class MeasureList
     {
         public double OEL { get; set; }
-        public bool LogNormalDist { get; set; }
-
         private static readonly Regex rgxME = new Regex(@"(sd|cv)\(.*\)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         #region Constructor
@@ -22,10 +20,9 @@
                 measuresByCensoringType.Add(ctype, new List<Measure>());
         }
 
-        public MeasureList(string s, double oel = 100, bool logNormDist = false) : this()
+        public MeasureList(string s, double oel = 99.9) : this()
         {
             this.OEL = oel;
-            this.LogNormalDist = logNormDist;
 
             string[] records = s.Replace(" ", "").Split(recordSeparators, StringSplitOptions.RemoveEmptyEntries);
             if (records.Length == 0)
@@ -68,20 +65,15 @@
 
                  }
             }
-
-            if ( this.LogNormalDist && this.OEL != null )
-            {
-                StandardiserObservations();
-            }
         }
 
 	// Convenience constructor added
-        public MeasureList(Array measures, double oel, bool logNormDist) : this(ConvertMeasuresToString(measures), oel, logNormDist)
+        public MeasureList(Array measures, double oel) : this(ConvertMeasuresToString(measures), oel)
         {
         }
 
 	// Convenience constructor added
-        public MeasureList(Array measures, double[] measErrRange, double oel, bool logNormDist) : this(ConvertMeasErrToString(measErrRange) + ConvertMeasuresToString(measures), oel, logNormDist)
+        public MeasureList(Array measures, double oel, double[] measErrRange) : this(ConvertMeasErrToString(measErrRange) + ConvertMeasuresToString(measures), oel)
         {
 
         }
@@ -454,10 +446,8 @@
         private List<Measure> measuresList = new List<Measure>();
         #endregion
 
-        public void StandardiserObservations()
+        public void StandardizeObservations(double oel)
         {
-            double oel = (double) this.OEL;
-
             foreach (Measure m in measuresList)
             {
                 if (!double.IsNaN(m.A))
