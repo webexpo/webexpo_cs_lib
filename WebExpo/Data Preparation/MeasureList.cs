@@ -10,6 +10,7 @@
     public class MeasureList
     {
         public double OEL { get; set; }
+        bool ObsStandardized = false;
         private static readonly Regex rgxME = new Regex(@"(sd|cv)\(.*\)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         #region Constructor
@@ -448,16 +449,21 @@
 
         public void StandardizeObservations(double oel)
         {
-            foreach (Measure m in measuresList)
+            if (!this.ObsStandardized)
             {
-                if (!double.IsNaN(m.A))
+                foreach (Measure m in measuresList)
                 {
-                    m.A = m.A / oel;
+                    if (!double.IsNaN(m.A))
+                    {
+                        m.A = m.A / oel;
+                    }
+                    if (!double.IsNaN(m.B))
+                    {
+                        m.B = m.B / oel;
+                    }
                 }
-                if (!double.IsNaN(m.B))
-                {
-                    m.B = m.B / oel;
-                }
+
+                this.ObsStandardized = true;
             }
         }
 
