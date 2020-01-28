@@ -73,7 +73,13 @@
         {
         }
 
-	// Convenience constructor added
+        // Convenience constructor added
+        public MeasureList(Array measures, double oel, double measErr) : this(ConvertMeasErrToString(new double[] { measErr, measErr }) + ConvertMeasuresToString(measures), oel)
+        {
+
+        }
+
+        // Convenience constructor added
         public MeasureList(Array measures, double oel, double[] measErrRange) : this(ConvertMeasErrToString(measErrRange) + ConvertMeasuresToString(measures), oel)
         {
 

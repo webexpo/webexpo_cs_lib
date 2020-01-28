@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
- 
+
     public abstract class Model
     {
         public ModelResult Result { get; internal set; } = null;
@@ -16,11 +16,14 @@
         public bool OutcomeIsLogNormallyDistributed { get; private set; } = true;
         public static Version Version { get; private set; } = new Version(0, 3);
         internal MeasurementError ME { get; private set; }
+        public MeasureList Measures { get; private set; }
         public Messages Messages { get; private set; } = new Messages();
         public uint PRNGSeed { get; private set; }
         protected string ClassName;
         public Model(MeasureList measures, bool outcomeIsLogNormallyDistributed, McmcParameters mcmcParams)
         {
+            Measures = measures;
+
             this.ClassName = this.GetType().Name;
             if (mcmcParams == null)
             {
