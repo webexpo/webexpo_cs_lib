@@ -20,9 +20,42 @@
         public Messages Messages { get; private set; } = new Messages();
         public uint PRNGSeed { get; private set; }
         protected string ClassName;
+
+        internal class OelStandardizer
+        {
+            Model M;
+
+            internal OelStandardizer(Model m)
+            {
+                M = m;
+            }
+
+            internal void StandardizeObservations()
+            {
+                M.Measures.StandardizeObservations();
+            }
+
+            internal void StandarizePastData()
+            {
+                ((SEGInformedVarModel)M).PastData.Mean -= Math.Log(M.OEL);
+            }
+
+            internal void UnstandardizeMuChains()
+            {
+                M.Result.UnstandardizeChains(M.OEL);
+            }
+        }
+
+        internal OelStandardizer OelStdz;
+
         public Model(MeasureList measures, bool outcomeIsLogNormallyDistributed, McmcParameters mcmcParams)
         {
+            OelStdz = new OelStandardizer(this);
             Measures = measures;
+            if (this.OutcomeIsLogNormallyDistributed)
+            {
+                OelStdz.StandardizeObservations();
+            }
 
             this.ClassName = this.GetType().Name;
             if (mcmcParams == null)
@@ -41,8 +74,6 @@
             this.Data = new DataSummary(measures, this.OutcomeIsLogNormallyDistributed);
             this.ME = measures.ME;
             this.OEL = measures.OEL;
-
-
         }
         protected static Model.MESupport MeasurementErrorSupport = new MESupport(me_CV: false, meSD: false);
 
@@ -89,30 +120,16 @@
             this.Result.PRNGSeed = prngSeed;
             if ( this.OutcomeIsLogNormallyDistributed )
             {
-                StandardizeInput();
-                if ( this.GetType() == typeof(SEGInformedVarModel) )
+                if (this.GetType() == typeof(SEGInformedVarModel))
                 {
-                    if ( ((SEGInformedVarModel) this).PastData.Defined ) 
-                    {
-                        ((SEGInformedVarModel)this).PastData.Mean -= Math.Log(Measures.OEL);
-                    }
+                    OelStdz.StandarizePastData();
                 }
             }
             this.Run();
             if ( this.OutcomeIsLogNormallyDistributed )
             {
-                UnstandardizeOutput();
+                OelStdz.UnstandardizeMuChains();
             }
-        }
-
-        void StandardizeInput()
-        {
-            Measures.StandardizeObservations();
-        }
-
-        void UnstandardizeOutput()
-        {
-            this.Result.UnstandardizeChains(this.OEL);
         }
     }
 }
