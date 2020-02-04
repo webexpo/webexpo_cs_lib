@@ -31,11 +31,6 @@
                 this.Messages.AddWarning("Mcmc parameters were undefined, using default values", this.ClassName);
             }
 
-            if ( outcomeIsLogNormallyDistributed )
-            {
-                measures.StandardizeObservations(measures.OEL);
-            }
-
             this.Messages.Add(measures.Error);
             this.Messages.Add(mcmcParams.Error);
             this.NIter = mcmcParams.NIter;
@@ -92,12 +87,25 @@
             Zygotine.Statistics.RNG.SetSeed(prngSeed);
             this.PRNGSeed = prngSeed;
             this.Result.PRNGSeed = prngSeed;
+            if ( this.OutcomeIsLogNormallyDistributed )
+            {
+                StandardizeInput();
+            }
             this.Run();
             if ( this.OutcomeIsLogNormallyDistributed )
             {
-                this.Result.StandardizeChains(this.OEL);
+                UnstandardizeOutput();
             }
         }
 
+        void StandardizeInput()
+        {
+            Measures.StandardizeObservations();
+        }
+
+        void UnstandardizeOutput()
+        {
+            this.Result.UnstandardizeChains(this.OEL);
+        }
     }
 }

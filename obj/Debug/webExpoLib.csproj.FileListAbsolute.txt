@@ -3,3 +3,9 @@ C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphiq
 C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphique.Csharp\webExpoLibProject\obj\Debug\webExpoLib.csproj.CoreCompileInputs.cache
 C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphique.Csharp\webExpoLibProject\obj\Debug\webExpo.dll
 C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpo.InterfaceGraphique.Csharp\webExpoLibProject\obj\Debug\webExpo.pdb
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\bin\Debug\webExpo.dll
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\bin\Debug\webExpo.pdb
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\obj\Debug\webExpoLib.csprojAssemblyReference.cache
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\obj\Debug\webExpoLib.csproj.CoreCompileInputs.cache
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\obj\Debug\webExpo.dll
+C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\obj\Debug\webExpo.pdb

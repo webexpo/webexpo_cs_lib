@@ -1,5 +1,6 @@
 ﻿namespace Zygotine.WebExpo
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -61,16 +62,18 @@
             Chains.AddWorkerMuChain(workers);
         }
 
-        public void StandardizeChains(double oel)
+        public void UnstandardizeChains(double oel)
         {
             Regex muChainRegex = new Regex(@"^mu.*Sample$");
             string[] chainIdsStandarize = this.GetChainNames().Where(cn => muChainRegex.Match(cn).Success).ToArray<string>();
             foreach( string chainId in chainIdsStandarize)
             {
                 double[] c = this.GetChainByName(chainId);
+                bool workerChain = chainId != "muSample" && chainId != "muOverallSample";
                 for ( int i = 0; i < c.Length; i++ )
                 {
-                    c[i] += System.Math.Log(oel);
+                    double delta = workerChain ? GetChainByName("muOverallSample")[i] : Math.Log(oel);
+                    c[i] += delta;
                 }
             }
         }

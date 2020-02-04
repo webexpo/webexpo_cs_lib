@@ -27,7 +27,7 @@
             MeasurementErrorSupport = new MESupport(me_CV: false, meSD: false);
         }
 
-        public BetweenWorkerModel(MeasureList measures, AbstractBWModelParameters specificParams, McmcParameters mcmcParams)
+        public BetweenWorkerModel(MeasureList measures, AbstractBWModelParameters specificParams, McmcParameters mcmcParams = null)
             : base(measures, specificParams.LogNormalDstrn, mcmcParams)
         {
             this.Result = new ModelResult(this, "muOverall", "sigmaWithin", "sigmaBetween");

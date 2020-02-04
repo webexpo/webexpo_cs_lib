@@ -10,6 +10,7 @@
     public class MeasureList
     {
         public double OEL { get; set; }
+        
         bool ObsStandardized = false;
         private static readonly Regex rgxME = new Regex(@"(sd|cv)\(.*\)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
@@ -85,6 +86,10 @@
 
         }
 
+        public MeasureList(Dictionary<string, double[]> workerMeasures, double oel, double[] measErrRange = null) : this(ConvertMeasErrToString(measErrRange) + ConvertMeasuresToString(workerMeasures), oel)
+        {
+
+        }
 
         private static String ConvertMeasuresToString(Array measures)
         {
@@ -92,6 +97,20 @@
             measures.CopyTo(meas, 0);
             string str = String.Join("|", meas);
             return str;
+        }
+
+        private static String ConvertMeasuresToString(Dictionary<string, double[]> workerMeasures)
+        {
+            List<string> meas = new List<string>();
+
+            foreach (KeyValuePair<string, double[]> entry in workerMeasures)
+            {
+                foreach( double m in entry.Value )
+                {
+                    meas.Add(string.Format("{0}\t{1}", m, entry.Key));
+                }
+            }
+            return ConvertMeasuresToString(meas.ToArray());
         }
 
         private static String ConvertMeasErrToString(double[] measErrVarCoeffRange)
@@ -453,7 +472,7 @@
         private List<Measure> measuresList = new List<Measure>();
         #endregion
 
-        public void StandardizeObservations(double oel)
+        public void StandardizeObservations()
         {
             if (!this.ObsStandardized)
             {
@@ -461,11 +480,11 @@
                 {
                     if (!double.IsNaN(m.A))
                     {
-                        m.A = m.A / oel;
+                        m.A = m.A / OEL;
                     }
                     if (!double.IsNaN(m.B))
                     {
-                        m.B = m.B / oel;
+                        m.B = m.B / OEL;
                     }
                 }
 
