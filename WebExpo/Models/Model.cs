@@ -90,6 +90,13 @@
             if ( this.OutcomeIsLogNormallyDistributed )
             {
                 StandardizeInput();
+                if ( this.GetType() == typeof(SEGInformedVarModel) )
+                {
+                    if ( ((SEGInformedVarModel) this).PastData.Defined ) 
+                    {
+                        ((SEGInformedVarModel)this).PastData.Mean -= Math.Log(Measures.OEL);
+                    }
+                }
             }
             this.Run();
             if ( this.OutcomeIsLogNormallyDistributed )
