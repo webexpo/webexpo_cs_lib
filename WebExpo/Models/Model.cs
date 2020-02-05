@@ -41,11 +41,11 @@
                     {
                         if (!double.IsNaN(m.A))
                         {
-                            m.A = m.A / M.OEL;
+                            m.A = m.A / M.Measures.OEL;
                         }
                         if (!double.IsNaN(m.B))
                         {
-                            m.B = m.B / M.OEL;
+                            m.B = m.B / M.Measures.OEL;
                         }
                     }
 
@@ -68,7 +68,7 @@
                     bool workerChain = chainId != "muSample" && chainId != "muOverallSample";
                     for (int i = 0; i < c.Length; i++)
                     {
-                        double delta = workerChain || !M.OutcomeIsLogNormallyDistributed ? M.Result.GetChainByName("muOverallSample")[i] : Math.Log(M.OEL);
+                        double delta = workerChain ? M.Result.GetChainByName("muOverallSample")[i] : Math.Log(M.OEL);
                         c[i] += delta;
                     }
                 }
@@ -155,7 +155,10 @@
                 }
             }
             this.Run();
-            OelStdz.UnstandardizeMuChains();
+            if (this.OutcomeIsLogNormallyDistributed)
+            {
+                OelStdz.UnstandardizeMuChains();
+            }
         }
     }
 }
