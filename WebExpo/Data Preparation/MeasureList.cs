@@ -469,28 +469,8 @@
         private Dictionary<Worker, List<Measure>> measuresByWorker = new Dictionary<Worker, List<Measure>>();
 
         // measuresList donne les mesures dans l'ordre où elles ont été entrées.
-        private List<Measure> measuresList = new List<Measure>();
+        public List<Measure> measuresList { get; private set; } = new List<Measure>();
         #endregion
-
-        public void StandardizeObservations()
-        {
-            if (!this.ObsStandardized)
-            {
-                foreach (Measure m in measuresList)
-                {
-                    if (!double.IsNaN(m.A))
-                    {
-                        m.A = m.A / OEL;
-                    }
-                    if (!double.IsNaN(m.B))
-                    {
-                        m.B = m.B / OEL;
-                    }
-                }
-
-                this.ObsStandardized = true;
-            }
-        }
 
         #region properties
         public bool Valid { get { return Count > 5; } }

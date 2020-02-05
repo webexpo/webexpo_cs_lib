@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text.RegularExpressions;
+    using System.Linq;
 
     public abstract class Model
     {
@@ -24,6 +26,7 @@
         internal class OelStandardizer
         {
             Model M;
+            bool ObsStandardized = false;
 
             internal OelStandardizer(Model m)
             {
@@ -32,7 +35,22 @@
 
             internal void StandardizeObservations()
             {
-                M.Measures.StandardizeObservations();
+                if (!this.ObsStandardized)
+                {
+                    foreach (Measure m in M.Measures.measuresList)
+                    {
+                        if (!double.IsNaN(m.A))
+                        {
+                            m.A = m.A / M.OEL;
+                        }
+                        if (!double.IsNaN(m.B))
+                        {
+                            m.B = m.B / M.OEL;
+                        }
+                    }
+
+                    this.ObsStandardized = true;
+                }
             }
 
             internal void StandarizePastData()
@@ -42,7 +60,18 @@
 
             internal void UnstandardizeMuChains()
             {
-                M.Result.UnstandardizeChains(M.OEL);
+                Regex muChainRegex = new Regex(@"^mu.*Sample$");
+                string[] chainIdsStandarize = M.Result.GetChainNames().Where(cn => muChainRegex.Match(cn).Success).ToArray<string>();
+                foreach (string chainId in chainIdsStandarize)
+                {
+                    double[] c = M.Result.GetChainByName(chainId);
+                    bool workerChain = chainId != "muSample" && chainId != "muOverallSample";
+                    for (int i = 0; i < c.Length; i++)
+                    {
+                        double delta = workerChain || !M.OutcomeIsLogNormallyDistributed ? M.Result.GetChainByName("muOverallSample")[i] : Math.Log(M.OEL);
+                        c[i] += delta;
+                    }
+                }
             }
         }
 
@@ -126,10 +155,7 @@
                 }
             }
             this.Run();
-            if ( this.OutcomeIsLogNormallyDistributed )
-            {
-                OelStdz.UnstandardizeMuChains();
-            }
+            OelStdz.UnstandardizeMuChains();
         }
     }
 }

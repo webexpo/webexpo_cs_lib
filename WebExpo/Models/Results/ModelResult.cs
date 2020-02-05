@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
 
     public class ModelResult
     {
@@ -61,22 +60,5 @@
         {
             Chains.AddWorkerMuChain(workers);
         }
-
-        public void UnstandardizeChains(double oel)
-        {
-            Regex muChainRegex = new Regex(@"^mu.*Sample$");
-            string[] chainIdsStandarize = this.GetChainNames().Where(cn => muChainRegex.Match(cn).Success).ToArray<string>();
-            foreach( string chainId in chainIdsStandarize)
-            {
-                double[] c = this.GetChainByName(chainId);
-                bool workerChain = chainId != "muSample" && chainId != "muOverallSample";
-                for ( int i = 0; i < c.Length; i++ )
-                {
-                    double delta = workerChain ? GetChainByName("muOverallSample")[i] : Math.Log(oel);
-                    c[i] += delta;
-                }
-            }
-        }
-
     }
 }
