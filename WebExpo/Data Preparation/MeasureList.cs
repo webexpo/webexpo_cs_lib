@@ -11,7 +11,6 @@
     {
         public double OEL { get; set; }
         
-        bool ObsStandardized = false;
         private static readonly Regex rgxME = new Regex(@"(sd|cv)\(.*\)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         #region Constructor
