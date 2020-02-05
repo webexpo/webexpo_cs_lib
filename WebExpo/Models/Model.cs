@@ -58,7 +58,7 @@
                 ((SEGInformedVarModel)M).PastData.Mean -= Math.Log(M.OEL);
             }
 
-            internal void UnstandardizeMuChains()
+            internal void AdjustMuChains()
             {
                 Regex muChainRegex = new Regex(@"^mu.*Sample$");
                 string[] chainIdsStandarize = M.Result.GetChainNames().Where(cn => muChainRegex.Match(cn).Success).ToArray<string>();
@@ -66,10 +66,13 @@
                 {
                     double[] c = M.Result.GetChainByName(chainId);
                     bool workerChain = chainId != "muSample" && chainId != "muOverallSample";
-                    for (int i = 0; i < c.Length; i++)
-                    {
-                        double delta = workerChain ? M.Result.GetChainByName("muOverallSample")[i] : Math.Log(M.OEL);
-                        c[i] += delta;
+                    if (workerChain || M.OutcomeIsLogNormallyDistributed) {
+                        double[] muOverallChain = workerChain ? M.Result.GetChainByName("muOverallSample") : null;
+                        for (int i = 0; i < c.Length; i++)
+                        {
+                            double delta = workerChain? muOverallChain[i] : Math.Log(M.OEL);
+                            c[i] += delta;
+                        }
                     }
                 }
             }
@@ -155,10 +158,7 @@
                 }
             }
             this.Run();
-            if (this.OutcomeIsLogNormallyDistributed)
-            {
-                OelStdz.UnstandardizeMuChains();
-            }
+            OelStdz.AdjustMuChains();
         }
     }
 }
