@@ -84,10 +84,6 @@
         {
             OelStdz = new OelStandardizer(this);
             Measures = measures;
-            if (this.OutcomeIsLogNormallyDistributed)
-            {
-                OelStdz.StandardizeObservations();
-            }
 
             this.ClassName = this.GetType().Name;
             if (mcmcParams == null)
@@ -103,6 +99,10 @@
             this.NThin = mcmcParams.NThin;
             this.MonitorBurnin = mcmcParams.MonitorBurnin;
             this.OutcomeIsLogNormallyDistributed = outcomeIsLogNormallyDistributed;
+            if (this.OutcomeIsLogNormallyDistributed)
+            {
+                OelStdz.StandardizeObservations();
+            }
             this.Data = new DataSummary(measures, this.OutcomeIsLogNormallyDistributed);
             this.ME = measures.ME;
             this.OEL = measures.OEL;
