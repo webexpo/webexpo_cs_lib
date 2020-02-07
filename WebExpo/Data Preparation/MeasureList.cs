@@ -513,6 +513,7 @@
         public Dictionary<Worker, List<Measure>> MeasuresByWorker { get { return measuresByWorker; } }
         public Messages Error { get; private set; } = new Messages();
         public string ClassName { get; private set; }
+        public bool ObsStandardized { get; set; } = false;
         #endregion
 
         #region fields and records separators
