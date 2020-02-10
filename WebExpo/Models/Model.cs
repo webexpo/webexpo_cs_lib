@@ -26,7 +26,6 @@
         internal class OelStandardizer
         {
             Model M;
-            bool ObsStandardized = false;
 
             internal OelStandardizer(Model m)
             {
@@ -35,7 +34,7 @@
 
             internal void StandardizeObservations()
             {
-                if (!this.ObsStandardized)
+                if (!M.Measures.ObsStandardized)
                 {
                     foreach (Measure m in M.Measures.measuresList)
                     {
@@ -49,7 +48,7 @@
                         }
                     }
 
-                    this.ObsStandardized = true;
+                    M.Measures.ObsStandardized = true;
                 }
             }
 
