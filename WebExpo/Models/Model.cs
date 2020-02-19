@@ -65,13 +65,11 @@
                 {
                     double[] c = M.Result.GetChainByName(chainId);
                     bool workerChain = chainId != "muSample" && chainId != "muOverallSample";
-                    if (workerChain || M.OutcomeIsLogNormallyDistributed) {
-                        double[] muOverallChain = workerChain ? M.Result.GetChainByName("muOverallSample") : null;
-                        for (int i = 0; i < c.Length; i++)
-                        {
-                            double delta = workerChain? muOverallChain[i] : Math.Log(M.OEL);
-                            c[i] += delta;
-                        }
+                    double[] muOverallChain = workerChain ? M.Result.GetChainByName("muOverallSample") : null;
+                    for (int i = 0; i < c.Length; i++)
+                    {
+                        double delta = workerChain? muOverallChain[i] : Math.Log(M.OEL);
+                        c[i] += delta;
                     }
                 }
             }
@@ -140,7 +138,7 @@
 
         public void Compute(uint prngSeed)
         {
-            if(!this.Valid)
+            if (!this.Valid)
             {
                 this.Result.Messages.AddError("Tentative de faire rouler un modèle qui n'est pas valide.", this.ClassName);
                 return;
@@ -149,7 +147,7 @@
             Zygotine.Statistics.RNG.SetSeed(prngSeed);
             this.PRNGSeed = prngSeed;
             this.Result.PRNGSeed = prngSeed;
-            if ( this.OutcomeIsLogNormallyDistributed )
+            if (this.OutcomeIsLogNormallyDistributed)
             {
                 if (this.GetType() == typeof(SEGInformedVarModel))
                 {
@@ -157,7 +155,9 @@
                 }
             }
             this.Run();
-            OelStdz.AdjustMuChains();
+            if (this.OutcomeIsLogNormallyDistributed) {
+                OelStdz.AdjustMuChains();
+            }
         }
     }
 }
