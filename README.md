@@ -1,6 +1,6 @@
 # WEBEXPO C# Library
 
-This repository contains the R algorithms associated with the Wexbexpo project, including the calculation algorithms, a random dataset generators, and a script replicating all numerical exemples presented in the tables of the scientific report.
+This repository contains the C# algorithms associated with the Wexbexpo project, including the calculation algorithms, a random dataset generators, and a script replicating all numerical exemples presented in the tables of the scientific report.
 
 The scientific report describing the principles and details of the calculations allowed by the WEBEXPO algorithms can be found [here](https://www.irsst.qc.ca/publications-et-outils/publication/i/101066/n/webexpo).
 
