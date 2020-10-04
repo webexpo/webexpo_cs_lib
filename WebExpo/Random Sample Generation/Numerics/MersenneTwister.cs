@@ -87,14 +87,22 @@
             mt[0] = s & 0xffffffffU;
             for (mti = 1; mti < N; mti++)
             {
-                mt[mti] =
-                (1812433253U * (mt[mti - 1] ^ (mt[mti - 1] >> 30)) + (uint)mti);
-                /* See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. */
-                /* In the previous versions, MSBs of the seed affect   */
-                /* only MSBs of the Array mt[].                        */
-                /* 2002/01/09 modified by Makoto Matsumoto             */
-                mt[mti] &= 0xffffffffU;
-                /* for >32 bit machines */
+                try
+                {
+                    mt[mti] =
+                    (1812433253U * (mt[mti - 1] ^ (mt[mti - 1] >> 30)) + (uint)mti);
+                    /* See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. */
+                    /* In the previous versions, MSBs of the seed affect   */
+                    /* only MSBs of the Array mt[].                        */
+                    /* 2002/01/09 modified by Makoto Matsumoto             */
+                    mt[mti] &= 0xffffffffU;
+                    /* for >32 bit machines */
+                }
+                catch (System.IndexOutOfRangeException)
+                {
+                    // Something went wrong, so let's go back and try again
+                    mti--;
+                }
             }
         }
         /* initialize by an Array with Array-length */
