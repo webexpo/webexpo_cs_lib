@@ -9,3 +9,9 @@ C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\
 C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\obj\Debug\webExpoLib.csproj.CoreCompileInputs.cache
 C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\obj\Debug\webExpo.dll
 C:\Users\p0070611\Documents\Visual Studio 2017\Projects\WebExpoExamples\WebExpo\obj\Debug\webExpo.pdb
+C:\Users\USER\Documents\Visual Studio 2017\Projects\WebexpoValidation\Webexpo\bin\Debug\webExpo.dll
+C:\Users\USER\Documents\Visual Studio 2017\Projects\WebexpoValidation\Webexpo\bin\Debug\webExpo.pdb
+C:\Users\USER\Documents\Visual Studio 2017\Projects\WebexpoValidation\Webexpo\obj\Debug\webExpoLib.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\Visual Studio 2017\Projects\WebexpoValidation\Webexpo\obj\Debug\webExpo.dll
+C:\Users\USER\Documents\Visual Studio 2017\Projects\WebexpoValidation\Webexpo\obj\Debug\webExpo.pdb
+C:\Users\USER\Documents\Visual Studio 2017\Projects\WebexpoValidation\Webexpo\obj\Debug\webExpoLib.csprojAssemblyReference.cache

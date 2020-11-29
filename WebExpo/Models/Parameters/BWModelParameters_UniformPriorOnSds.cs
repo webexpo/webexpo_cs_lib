@@ -1,6 +1,8 @@
 ﻿namespace Zygotine.WebExpo
 {
     using System;
+    using System.Collections.Generic;
+    using System.Reflection;
     using Zygotine.Util;
     public class BWModelParameters_UniformPriorOnSDs : AbstractBWModelParameters
     {
@@ -56,6 +58,14 @@
         protected override double GetSigmaWithin()
         {
             return Tools.Mean(this.SigmaWithinRange);
+        }
+
+        public IEnumerator<PropertyInfo> GetEnumerator()
+        {
+            foreach (var property in typeof(BWModelParameters_UniformPriorOnSDs).GetProperties())
+            {
+                yield return property;
+            }
         }
     }
 }
